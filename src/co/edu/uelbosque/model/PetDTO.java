@@ -120,6 +120,12 @@ public class PetDTO {
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
 	}
+	@Override
+	public String toString() {
+		return "PetDTO [id=" + id + ", microchip=" + microchip + ", species=" + species + ", sex=" + sex + ", size="
+				+ size + ", potentDangerous=" + potentDangerous + ", neighborhood=" + neighborhood + "]";
+	}
+	
 	
 	
 	
