@@ -81,7 +81,7 @@ key = true;
 	int quantity = petList.size();
 		
 		for (int i = 0; i < quantity; i++) {
-			int var = String.valueOf(petList.get(i).getMicrochip()).length();
+			int var = ( String.valueOf(petList.get(i).getMicrochip()).length() - 3);
 			String part1 = String.valueOf(petList.get(i).getMicrochip()).substring(var);
 			String part2 = String.valueOf(petList.get(i).getSpecies().charAt(0));
 			String part3 = String.valueOf(petList.get(i).getSex().charAt(0));
@@ -100,7 +100,7 @@ key = true;
 			try {
 				for (int j = 0; j < quantity; j++) {
 					if(petList.get(i).getId() == petList.get(j).getId()&& i != j) {
-						var++;
+						var--;
 						part1 = String.valueOf(petList.get(i).getMicrochip()).substring(var);
 					}
 				}
@@ -149,8 +149,6 @@ key = true;
 
 		
 	}
-
-	
 	
 	public String findByMultipleFields(String species, String sex , String size, String potentDangerous) {
 		

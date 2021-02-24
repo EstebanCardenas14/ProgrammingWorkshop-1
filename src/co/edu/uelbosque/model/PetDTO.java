@@ -122,8 +122,8 @@ public class PetDTO {
 	}
 	@Override
 	public String toString() {
-		return "PetDTO [id=" + id + ", microchip=" + microchip + ", species=" + species + ", sex=" + sex + ", size="
-				+ size + ", potentDangerous=" + potentDangerous + ", neighborhood=" + neighborhood + "]";
+		return " ID:" + id + "\n MICROCHIP : " + microchip + "\n SPECIES : " + species + "\n SEX : " + sex + "\n SIZE : "
+				+ size + "\n POTENTDANGEROUS : " + potentDangerous + "\n NEIGHBORHOOD : " + neighborhood ;
 	}
 	
 	

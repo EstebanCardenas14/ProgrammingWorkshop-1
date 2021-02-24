@@ -12,10 +12,10 @@ public class Controller {
 		
 		System.out.println(mg.uploadData());
 		
-		
+		mg.assignID();
 		
 		for (int i = 0; i < 5; i++) {
-			System.out.println(mg.getPetList().get(i).toString());
+			System.out.println(mg.getPetList().get(i).toString() + "\n");
 		}
 	   
 		
