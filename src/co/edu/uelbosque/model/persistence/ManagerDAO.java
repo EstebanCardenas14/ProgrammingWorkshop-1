@@ -130,28 +130,34 @@ public class ManagerDAO {
 
 		int pet = 0;
 
+	
 		for (int i = 0; i < petList.size(); i++) {
-			if (String.valueOf(petList.get(i).getMicrochip()) == microchip) {
+			
+			if (petList.get(i).getMicrochip() == Long.parseLong(microchip)) {
 				pet = i;
-			} else {
-				return "Sorry :( - Pet not found!";
-			}
+				return "--------------------------------- \n DATA PET: \n" + petList.get(pet).toString();
+			} 
 		}
 
-		return "DATA PET: \n" + petList.get(pet).toString();
-	}
+		return "Sorry :( - Pet not found!";
+			}
 
 	public String countBySpecies(String species) {
 
 		int pets = 0;
 
-		for (int i = 0; i < petList.size(); i++) {
-			if (String.valueOf(petList.get(i).getSpecies()) == species) {
-				pets++;
+		if(species.equals("CANINO") || species.equals("FELINO")) {
+			for (int i = 0; i < petList.size(); i++) {
+				if (petList.get(i).getSpecies().equals(species)) {
+					pets++;
+				}
 			}
-		}
 
-		return "The number of the species " + species + " is : #" + pets;
+			return "The number of animals of the species " + species + " is : #" + pets;
+		}
+		
+
+		return "Sorry, not register of species " + species;
 
 	}
 
