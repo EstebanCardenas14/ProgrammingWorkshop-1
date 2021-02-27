@@ -5,6 +5,13 @@ import java.util.Scanner;
 
 import co.edu.uelbosque.model.persistence.ManagerDAO;
 
+/**
+ * 
+ * @author luisestebancardenascortes 
+ * in this class you will join all the logic of the program
+ *
+ */
+
 public class Controller {
 
 	ManagerDAO mg = new ManagerDAO("pets-citizens.csv");
@@ -22,6 +29,10 @@ public class Controller {
 	String size = "";
 	boolean dangerous = false;
 
+	/**
+	 * Simple Constructor Method 
+	 */
+	
 	public Controller() throws IOException {
 		startApplication();
 		assignID(key);
@@ -29,6 +40,13 @@ public class Controller {
 
 	}
 
+	/**
+	 * method to start the application<b>pre</b>CSV file path must be specified<br>
+	 * <b>post</b>reading CSV file<br>
+	 * 
+	 * @return success or error message
+	 */
+	
 	public void startApplication() throws IOException {
 
 		String startData = "";
@@ -59,6 +77,13 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * method used to generate the IDs <b>pre</b>permission key to generate the IDs<br>
+	 * <b>post</b>IDs are generated with the requested characteristics<br>
+	 * 
+	 * @return success or error message
+	 */
+	
 	public void assignID(boolean key) {
 		if (key == true) {
 			System.out.println(Style(33, "   Do you want to assign an ID? \n     - YES            -NO "));
@@ -104,6 +129,13 @@ public class Controller {
 
 	}
 
+	/**
+	 * application options menu <b>pre</b>permission key to generate start the menu<br>
+	 * <b>post</b>selected menu options<br>
+	 * 
+	 * @return activation of the selected option
+	 */
+	
 	public void options(boolean key2) {
 
 		if (key2 == true) {
@@ -129,13 +161,26 @@ public class Controller {
 
 				break;
 			}
-
+			
+			default:
+				System.out.println("JUST PUT THE MENU OPTION");
+				
 			}
+			
+
 
 		}
 
 	}
 
+	/**
+	 * logic of the first menu option<b>pre</b>data required to execute the option<br>
+	 * <b>post</b>generated solution of problem one<br>
+	 * 
+	 * @return  animal data
+	 */
+
+	
 	public void optionOne(String option) {
 
 		System.out.println(Style(33, "   Put a numer Microchip plis! "));
@@ -148,11 +193,19 @@ public class Controller {
 			options(true);
 		}
 		if (back.equals("NO")) {
-			System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+			System.out.println(Style(22, " OKAY! see you later :)"));
 		}
+		
 
 	}
 
+	/**
+	 * logic of the second menu option<b>pre</b>data required to execute the option<br>
+	 * <b>post</b>generated solution of problem two<br>
+	 * 
+	 * @return  quantity of specie
+	 */
+	
 	public void optionTwo(String option) {
 		System.out.println(Style(33, "Put ONE of the following species! \n       -CANINO   -FELINO"));
 		option = sc.nextLine().toUpperCase();
@@ -164,12 +217,19 @@ public class Controller {
 			options(true);
 		}
 		if (back.equals("NO")) {
-			System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+			System.out.println(Style(22, " OKAY! see you later :)"));
 		}
-
+		
 
 	}
 
+	/**
+	 * logic of the third menu option<b>pre</b>data required to execute the option<br>
+	 * <b>post</b>generated solution of problem three<br>
+	 * 
+	 * @return  data on possible dangerous animals
+	 */
+	
 	public void optionThird(int quantity, String top_last, String neighborhood) {
 		String a = "\n -USAQUEN      -CHAPINERO      -SANTA FE      -SAN CRISTOBAL      -USME   ";
 		String b = "\n -TUNJUELITO   -BOSA           -KENNEDY       -FONTIBON           -ENGATIVA ";
@@ -177,7 +237,6 @@ public class Controller {
 		String d = "\n -P. ARANDA    -LA CANDELARIA  -R. URIBE      -C. BOLIVAR         -SUMAPAZ  ";
 		String e = "\n -MUNICIPIOS ALEDA�OS BOGOTA D.C.             -SIN IDENTIFICAR";
 
-		String sopi = "";
 		try {
 			for (int i = 0; i < 4; i++) {
 
@@ -186,7 +245,8 @@ public class Controller {
 					quantity = sc.nextInt();
 				}
 				if (i == 1) {
-				
+					System.out.println("");
+					top_last = sc.nextLine().toUpperCase();
 				}
 				if (i == 2) {
 					System.out.println(Style(28, "  Second The order to see! \n       -TOP  -LAST "));
@@ -196,7 +256,7 @@ public class Controller {
 				if (i == 3) {
 					System.out.println(Style(76,
 							"                    Third put the neighborhood to review \n" + a + b + c + d + e));
-					neighborhood = sc.nextLine();
+					neighborhood = sc.nextLine().toUpperCase();
 				}
 			}
 		} catch (Exception e2) {
@@ -204,9 +264,7 @@ public class Controller {
 		}
 
 		String result = mg.findBypotentDangerousInNeighborhood(quantity, top_last, neighborhood);
-		if (result.equals("")) {
-			System.out.println("Not found in data log");
-		} else {
+		
 			System.out.println(result + "\n\n");
 			System.out.println(Style(22, " Back To Menu  \n   -YES   -NO"));
 			String back = sc.nextLine().toUpperCase();
@@ -214,26 +272,34 @@ public class Controller {
 				options(true);
 			}
 			if (back.equals("NO")) {
-				System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+				System.out.println(Style(22, " OKAY! see you later :)"));
 			}
-		}
+			
+		
 
 	}
 
+	/**
+	 * logic of the four menu option<b>pre</b>data required to execute the option<br>
+	 * <b>post</b>generated solution of problem four<br>
+	 * 
+	 * @return  animals ID
+	 */
+	
 	public void optionFour(String species, String sex, String size, boolean dangerous) {
 		for (int i = 0; i < 4; i++) {
 
 			if (i == 0) {
-				System.out.println(Style(39, "First put a specie! "));
-				species = sc.nextLine();
+				System.out.println(Style(39, "First put a specie! \n  -CANINO  -FELINO"));
+				species = sc.nextLine().toUpperCase();
 			}
 			if (i == 1) {
-				System.out.println(Style(39, "Second put a sex! "));
-				sex = sc.nextLine();
+				System.out.println(Style(39, "Second put a sex!  \n  -MACHO  -HEMBRA"));
+				sex = sc.nextLine().toUpperCase();
 			}
 			if (i == 2) {
-				System.out.println(Style(39, "Third put a size! "));
-				size = sc.nextLine();
+				System.out.println(Style(39, "Third put a size! \n   -MINIATURA    -PEQUE�O \n   -MEDIANO      -GRANDE"));
+				size = sc.nextLine().toUpperCase();
 			}
 			if (i == 3) {
 				System.out.println(Style(39, "Four, you animal is dangerous?\n     -YES     -NO! "));
@@ -255,30 +321,20 @@ public class Controller {
 				options(true);
 			}
 			if (back.equals("NO")) {
-				System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+				System.out.println(Style(22, " OKAY! see you later :)"));
 			}
+			
 		}
 
 	}
 
-	public String stat() {
-		String a = "a";
-		try {
-			for (int i = 0; i < mg.getPetList().size(); i++) {
-				if (mg.getPetList().get(i).getNeighborhood().equals(mg.getPetList().get(i + 1).getNeighborhood())) {
-					a = a + "\n" + mg.getPetList().get(i).getNeighborhood();
-				} else {
-
-				}
-
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		return a;
-	}
-
+	/**
+	 * method used for program decoration<b>pre</b>number of characters and text to display<br>
+	 * <b>post</b>stylized text<br>
+	 * 
+	 * @return  stylized text
+	 */
+	
 	public String Style(int numer, String Text) {
 		String a = "-";
 		String solution = "";

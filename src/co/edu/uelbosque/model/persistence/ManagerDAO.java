@@ -12,6 +12,12 @@ import javax.swing.JOptionPane;
 
 import co.edu.uelbosque.model.PetDTO;
 
+/**
+ * 
+ * @author luisestebancardenascortes 
+ * in this class you find the methods and validations
+ *
+ */
 public class ManagerDAO {
 
 	private PetDTO petObj;
@@ -22,6 +28,12 @@ public class ManagerDAO {
 	private int number;
 	private Boolean key = false;
 
+	/**
+	 * Simple Constructor Method <b>pre</b>Ask for the path of the csv file<br>
+	 * <b>post</b>Assign the csv file path<br>
+	 * * @param v
+	 */
+
 	public ManagerDAO(String v) {
 		this.v = v;
 		petList = new ArrayList<PetDTO>();
@@ -29,6 +41,37 @@ public class ManagerDAO {
 		invertedList = new ArrayList<PetDTO>();
 
 	}
+
+	/**
+	 * Constructor method that initializes variables <b>pre</b>Variables must be
+	 * created.<br>
+	 * <b>post</b>Variables are initialized<br>
+	 * 
+	 * @param modelo
+	 * @param petObj
+	 * @param petList
+	 * @param invertedList
+	 * @param v
+	 * @param number
+	 * @param key
+	 */
+	public ManagerDAO(PetDTO petObj, ArrayList<PetDTO> petList, ArrayList<PetDTO> invertedList, String v, int number,
+			Boolean key) {
+		super();
+		this.petObj = petObj;
+		this.petList = petList;
+		this.invertedList = invertedList;
+		this.v = v;
+		this.number = number;
+		this.key = key;
+	}
+
+	/**
+	 * method used to read the csv file <b>pre</b>the path must be specified.<br>
+	 * <b>post</b>csv file is read and stored in an ArrayList<br>
+	 * 
+	 * @return success or error message
+	 */
 
 	public String uploadData() throws IOException {
 
@@ -79,6 +122,13 @@ public class ManagerDAO {
 
 	}
 
+	/**
+	 * method used to generate the IDs <b>pre</b>csv file must be read<br>
+	 * <b>post</b>IDs are generated with the requested characteristics<br>
+	 * 
+	 * @return success or error message
+	 */
+
 	public String assignID() {
 
 		if (key == true) {
@@ -106,7 +156,6 @@ public class ManagerDAO {
 						if (petList.get(i).getId() == petList.get(j).getId() && i != j) {
 							var--;
 							part1 = String.valueOf(petList.get(i).getMicrochip()).substring(var);
-							JOptionPane.showMessageDialog(null, "oka se repite puto");
 						}
 					}
 				} catch (Exception e) {
@@ -126,27 +175,41 @@ public class ManagerDAO {
 
 	}
 
+	/**
+	 * method to find by microchip <b>pre</b>a microchip must be entered<br>
+	 * <b>post</b>search for the animal corresponding to the microchip<br>
+	 * 
+	 * @return animal data
+	 */
+
 	public String findByMicrochip(String microchip) {
 
 		int pet = 0;
 
-	
 		for (int i = 0; i < petList.size(); i++) {
-			
+
 			if (petList.get(i).getMicrochip() == Long.parseLong(microchip)) {
 				pet = i;
 				return "--------------------------------- \n DATA PET: \n" + petList.get(pet).toString();
-			} 
+			}
 		}
 
 		return "Sorry :( - Pet not found!";
-			}
+	}
 
+	/**
+	 * method to count the number of species
+	 * <b>pre</b>a species must be entered<br>
+	 * <b>post</b>count the amount of data for that species<br>
+	 * 
+	 * @return quantity of specie
+	 */
+	
 	public String countBySpecies(String species) {
 
 		int pets = 0;
 
-		if(species.equals("CANINO") || species.equals("FELINO")) {
+		if (species.equals("CANINO") || species.equals("FELINO")) {
 			for (int i = 0; i < petList.size(); i++) {
 				if (petList.get(i).getSpecies().equals(species)) {
 					pets++;
@@ -155,18 +218,24 @@ public class ManagerDAO {
 
 			return "The number of animals of the species " + species + " is : #" + pets;
 		}
-		
 
 		return "Sorry, not register of species " + species;
 
 	}
 
+	/**
+	 * method of counting potentially dangerous animals in the neighborhood
+	 * <b>pre</b>number of animals, order and neighborhood must be entered<br>
+	 * <b>post</b>verifications of dangerous animals in the database<br>
+	 * 
+	 * @return data on possible dangerous animals
+	 */
+	
 	public String findBypotentDangerousInNeighborhood(int quantity, String position, String neighborhood) {
 
 		PetDTO[] Solution = new PetDTO[quantity];
 		int iterator = 0;
 		String visualS = "";
-		
 
 		Collections.reverse(petList);
 
@@ -181,12 +250,11 @@ public class ManagerDAO {
 			if (iterator < quantity) {
 
 				if (position.equals("TOP")) {
-				
-					
+
 					if (petList.get(i).getPotentDangerous() == true) {
 
 						if (petList.get(i).getNeighborhood().equals(neighborhood)) {
-                         
+
 							visualS = visualS + "\n" + petList.get(i) + "\n";
 							iterator++;
 
@@ -195,10 +263,10 @@ public class ManagerDAO {
 				}
 
 				if (position.equals("LAST")) {
-				
+
 					if (invertedList.get(i).getPotentDangerous() == true) {
 						if (invertedList.get(i).getNeighborhood().equals(neighborhood)) {
-							
+
 							visualS = visualS + "\n" + invertedList.get(i) + "\n";
 							iterator++;
 
@@ -207,62 +275,46 @@ public class ManagerDAO {
 					}
 				}
 			}
-			if(iterator == petList.size()) {
-				 visualS = "Not found in data log";
+
+			if (visualS.equals("")) {
+				visualS = "----------------------\nNot found in data log\n----------------------";
 			}
 
 		}
 
-		
-
 		return visualS;
 	}
 
+	/**
+	 * method used to search for animals with specific data
+	 * <b>pre</b>enter data such as species, sex, size and possibility of danger<br>
+	 * <b>post</b>search for animals with entered parameters <br>
+	 * 
+	 * @return animals ID
+	 */
+	
 	public String findByMultipleFields(String species, String sex, String size, Boolean potentDangerous) {
 
 		String solution = "";
-		
+
 		for (int i = 0; i < petList.size(); i++) {
-			if(petList.get(i).getSpecies().equals(species)) {
-				if(petList.get(i).getSex().equals(sex)) {
-					if(petList.get(i).getSize().equals(size)) {
-						if(petList.get(i).getPotentDangerous().equals(potentDangerous)) {
+			if (petList.get(i).getSpecies().equals(species)) {
+				if (petList.get(i).getSex().equals(sex)) {
+					if (petList.get(i).getSize().equals(size)) {
+						if (petList.get(i).getPotentDangerous().equals(potentDangerous)) {
 							solution = solution + "\n" + petList.get(i).getId() + "\n";
 						}
 					}
 				}
 			}
 		}
-		
-		
-		
-		return solution;
-	}
-	
-	public void repetitionTest() {
 
-		String b = petList.get(4).getId();
-		petList.get(77).setId(b);
-
-		for (int i = 0; i < petList.size(); i++) {
-			String a = petList.get(i).getId();
-			System.out.println(a);
-			for (int j = 0; j < petList.size(); j++) {
-				if (i != j) {
-					if (a == petList.get(j).getId()) {
-						JOptionPane.showMessageDialog(null, "oka se repite puto");
-					}
-
-				}
-
-			}
-			petList.remove(i);
-
+		if (solution.equals("")) {
+			solution = "--------------------\n DATA NOT FOUND \n--------------------";
 		}
 
+		return solution;
 	}
-
-	
 
 	/**
 	 * @return the petObj
