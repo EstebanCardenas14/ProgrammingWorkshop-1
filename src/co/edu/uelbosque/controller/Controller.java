@@ -25,7 +25,7 @@ public class Controller {
 	public Controller() throws IOException {
 		startApplication();
 		assignID(key);
-		optons(key2);
+		options(key2);
 
 	}
 
@@ -104,7 +104,7 @@ public class Controller {
 
 	}
 
-	public void optons(boolean key2) {
+	public void options(boolean key2) {
 
 		if (key2 == true) {
 			System.out.println(Style(60,
@@ -125,7 +125,7 @@ public class Controller {
 				break;
 			}
 			case "4": {
-			optionFour(species, sex, size, dangerous);
+				optionFour(species, sex, size, dangerous);
 
 				break;
 			}
@@ -137,16 +137,36 @@ public class Controller {
 	}
 
 	public void optionOne(String option) {
+
 		System.out.println(Style(33, "   Put a numer Microchip plis! "));
 		option = sc.nextLine();
-		System.out.println(mg.findByMicrochip(option));
+		System.out.println(mg.findByMicrochip(option)+ "\n\n");
+
+		System.out.println(Style(22, " Back To Menu  \n   -YES   -NO"));
+		String back = sc.nextLine().toUpperCase();
+		if (back.equals("YES")) {
+			options(true);
+		}
+		if (back.equals("NO")) {
+			System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+		}
 
 	}
 
 	public void optionTwo(String option) {
 		System.out.println(Style(33, "Put ONE of the following species! \n       -CANINO   -FELINO"));
 		option = sc.nextLine().toUpperCase();
-		System.out.println(mg.countBySpecies(option));
+		System.out.println(mg.countBySpecies(option)+ "\n\n");
+		
+		System.out.println(Style(22, " Back To Menu  \n   -YES   -NO"));
+		String back = sc.nextLine().toUpperCase();
+		if (back.equals("YES")) {
+			options(true);
+		}
+		if (back.equals("NO")) {
+			System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+		}
+
 
 	}
 
@@ -166,8 +186,7 @@ public class Controller {
 					quantity = sc.nextInt();
 				}
 				if (i == 1) {
-					System.out.println(Style(28, "  Second The order to see! \n       -TOP  -LAST "));
-					sopi = sc.nextLine().toUpperCase();
+				
 				}
 				if (i == 2) {
 					System.out.println(Style(28, "  Second The order to see! \n       -TOP  -LAST "));
@@ -188,7 +207,15 @@ public class Controller {
 		if (result.equals("")) {
 			System.out.println("Not found in data log");
 		} else {
-			System.out.println(result);
+			System.out.println(result + "\n\n");
+			System.out.println(Style(22, " Back To Menu  \n   -YES   -NO"));
+			String back = sc.nextLine().toUpperCase();
+			if (back.equals("YES")) {
+				options(true);
+			}
+			if (back.equals("NO")) {
+				System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+			}
 		}
 
 	}
@@ -211,22 +238,29 @@ public class Controller {
 			if (i == 3) {
 				System.out.println(Style(39, "Four, you animal is dangerous?\n     -YES     -NO! "));
 				String var = sc.nextLine().toUpperCase();
-				if(var.equals("YES")) {
+				if (var.equals("YES")) {
 					dangerous = true;
 				}
-				
-				
+
 			}
 		}
 		String check = mg.findByMultipleFields(species, sex, size, dangerous);
 		if (check.equals("")) {
 			System.out.println("Not found in data log");
 		} else {
-			System.out.println(check);
+			System.out.println(check + "\n\n");
+			System.out.println(Style(22, " Back To Menu  \n   -YES   -NO"));
+			String back = sc.nextLine().toUpperCase();
+			if (back.equals("YES")) {
+				options(true);
+			}
+			if (back.equals("NO")) {
+				System.out.println(Style(22, " OKAY! see you later :)  \n   -YES   -NO"));
+			}
 		}
-		
-		
+
 	}
+
 	public String stat() {
 		String a = "a";
 		try {
