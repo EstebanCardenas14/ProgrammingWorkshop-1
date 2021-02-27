@@ -165,7 +165,8 @@ public class ManagerDAO {
 
 		PetDTO[] Solution = new PetDTO[quantity];
 		int iterator = 0;
-		String visualS = "";// "Not found in data log";
+		String visualS = "";
+		
 
 		Collections.reverse(petList);
 
@@ -179,12 +180,13 @@ public class ManagerDAO {
 
 			if (iterator < quantity) {
 
-				if (position == "TOP") {
-
+				if (position.equals("TOP")) {
+				
+					
 					if (petList.get(i).getPotentDangerous() == true) {
 
 						if (petList.get(i).getNeighborhood().equals(neighborhood)) {
-
+                         
 							visualS = visualS + "\n" + petList.get(i) + "\n";
 							iterator++;
 
@@ -192,10 +194,11 @@ public class ManagerDAO {
 					}
 				}
 
-				if (position == "LAST") {
-
+				if (position.equals("LAST")) {
+				
 					if (invertedList.get(i).getPotentDangerous() == true) {
 						if (invertedList.get(i).getNeighborhood().equals(neighborhood)) {
+							
 							visualS = visualS + "\n" + invertedList.get(i) + "\n";
 							iterator++;
 
@@ -204,8 +207,13 @@ public class ManagerDAO {
 					}
 				}
 			}
+			if(iterator == petList.size()) {
+				 visualS = "Not found in data log";
+			}
 
 		}
+
+		
 
 		return visualS;
 	}
